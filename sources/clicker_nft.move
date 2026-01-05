@@ -55,9 +55,13 @@ fun init(ctx: &mut TxContext) {
     transfer::share_object(goat_registry);
 }
 
+#[test_only]
+public fun init_for_testing(ctx: &mut TxContext) {
+    init(ctx);
+}
+
 // ========= PUBLIC ENTRY FUNCTIONS =========
 
-/// Crée un nouveau NFT pour le joueur (qui sera amener a evoluer)
 public entry fun mint_nft(ctx: &mut TxContext) {
     let sender = tx_context::sender(ctx);
 
@@ -66,45 +70,36 @@ public entry fun mint_nft(ctx: &mut TxContext) {
         clicks: 0,
         tier: 0,
         name: string::utf8(b"Noob"),
-        image_url: string::utf8(b"https://placeholder.com/noob.png"),
+        image_url: string::utf8(b"https://ipfs.io/ipfs/bafkreidtymnhk6xiouem7ryvd7zbqiksyjropos5x3777nyglxmzlpqq7e"),
         is_goat: false,
     };
 
     let nft_id = object::id(&nft);
 
-    // Émettre l'événement
     event::emit(NFTMinted {
         nft_id,
         owner: sender,
     });
 
-    // Transférer le NFT au joueur
     transfer::transfer(nft, sender);
 }
 
-/// Fonction principale de click - incrémente et gère l'évolution
 public entry fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &mut TxContext) {
     let sender = tx_context::sender(ctx);
 
-    // Incrémenter les clicks
     nft.clicks = nft.clicks + 1;
 
-    // Mettre à jour le tier si nécessaire
     update_tier(nft);
 
-    // Vérifier si le joueur peut devenir GOAT
     if (nft.tier >= 3 && !nft.is_goat && registry.goat_count < 10) {
-        // Promouvoir à GOAT
         nft.tier = 4;
         nft.name = string::utf8(b"GOAT");
-        nft.image_url = string::utf8(b"https://placeholder.com/goat.png");
+        nft.image_url = string::utf8(b"https://ipfs.io/ipfs/bafybeiarb25eo4flfl5scqlqgujqcshh4ujvtkz4mwfmq2odrydnuwv3uq");
         nft.is_goat = true;
 
-        // Mettre à jour le registry
         registry.goat_count = registry.goat_count + 1;
         vector::push_back(&mut registry.goats, sender);
 
-        // Émettre l'événement GOAT
         event::emit(GOATAchieved {
             nft_id: object::id(nft),
             player: sender,
@@ -112,7 +107,6 @@ public entry fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &
         });
     };
 
-    // Émettre l'événement de click
     event::emit(Clicked {
         nft_id: object::id(nft),
         new_clicks: nft.clicks,
@@ -126,31 +120,28 @@ public entry fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &
 fun update_tier(nft: &mut ClickerNFT) {
     let new_tier = get_tier_for_clicks(nft.clicks);
 
-    // Ne mettre à jour que si le tier a changé et qu'on n'est pas GOAT
     if (new_tier > nft.tier && !nft.is_goat) {
         nft.tier = new_tier;
 
-        // Mettre à jour le nom et l'image selon le nouveau tier
         if (new_tier == 1) {
             nft.name = string::utf8(b"Tryhard");
-            nft.image_url = string::utf8(b"https://placeholder.com/tryhard.png");
+            nft.image_url = string::utf8(b"https://ipfs.io/ipfs/bafkreicfix2myezscdsvstylcbuc7xvavuk2ivazjm2st7alqrpxkn27zq");
         } else if (new_tier == 2) {
             nft.name = string::utf8(b"No-life");
-            nft.image_url = string::utf8(b"https://placeholder.com/nolife.png");
+            nft.image_url = string::utf8(b"https://ipfs.io/ipfs/bafkreies7qoecz4dzwrfw7gfz5meteeykbjmegvqmfewlrqs3mndx3nyoi");
         } else if (new_tier == 3) {
             nft.name = string::utf8(b"Legend");
-            nft.image_url = string::utf8(b"https://placeholder.com/legend.png");
+            nft.image_url = string::utf8(b"https://ipfs.io/ipfs/bafkreig3wfqysejjqrqzru5n65n2ir35wwlrslf5klvkof4zpphgs5ee3y");
         };
     };
 }
 
-/// Calcule le tier basé sur le nombre de clicks
 fun get_tier_for_clicks(clicks: u64): u8 {
-    if (clicks >= 1000) {
+    if (clicks >= 15) {
         3 // Legend
-    } else if (clicks >= 200) {
+    } else if (clicks >= 10) {
         2 // No-life
-    } else if (clicks >= 50) {
+    } else if (clicks >= 5) {
         1 // Tryhard
     } else {
         0 // Noob
@@ -159,7 +150,6 @@ fun get_tier_for_clicks(clicks: u64): u8 {
 
 // ========= VIEW FUNCTIONS =========
 
-/// Retourne le nom du tier
 public fun get_tier_name(tier: u8): String {
     if (tier == 4) {
         string::utf8(b"GOAT")
@@ -174,7 +164,8 @@ public fun get_tier_name(tier: u8): String {
     }
 }
 
-/// Getters pour accéder aux propriétés du NFT
+// ========= GETTER FUNCTIONS =========
+
 public fun get_clicks(nft: &ClickerNFT): u64 {
     nft.clicks
 }
@@ -195,7 +186,6 @@ public fun is_goat(nft: &ClickerNFT): bool {
     nft.is_goat
 }
 
-/// Getter pour le nombre de GOATs
 public fun get_goat_count(registry: &GOATRegistry): u64 {
     registry.goat_count
 }
