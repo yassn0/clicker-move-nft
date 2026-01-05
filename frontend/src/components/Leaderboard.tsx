@@ -1,13 +1,9 @@
 import type { LeaderboardEntry } from "../hooks/useFetchLeaderboard";
+import { displayName } from "../utils/nicknames";
 
 interface LeaderboardProps {
   leaderboard: LeaderboardEntry[];
   loading: boolean;
-}
-
-function shortenAddress(address: string): string {
-  if (address.length <= 10) return address;
-  return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
 export function Leaderboard({ leaderboard, loading }: LeaderboardProps) {
@@ -28,7 +24,7 @@ export function Leaderboard({ leaderboard, loading }: LeaderboardProps) {
           NO GOATS YET!
           <div className="mt-4 text-4xl">🎯</div>
           <p className="mt-4 pixel-text-xs" style={{ color: "var(--color-text-secondary)" }}>
-            BE THE FIRST TO REACH LEGEND!
+            BE THE FIRST TO REACH 20 CLICKS!
           </p>
         </div>
       ) : (
@@ -36,7 +32,7 @@ export function Leaderboard({ leaderboard, loading }: LeaderboardProps) {
           {leaderboard.map((entry) => (
             <div key={entry.address} className="pixel-leaderboard-entry">
               <span className="rank">#{entry.rank}</span>
-              <span className="address">{shortenAddress(entry.address)}</span>
+              <span className="address">{displayName(entry.address)}</span>
               <span className="clicks">{entry.clicks}</span>
             </div>
           ))}

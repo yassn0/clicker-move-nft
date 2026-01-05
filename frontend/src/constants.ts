@@ -3,9 +3,9 @@ export const NETWORK = "testnet";
 
 // Smart contract deployment
 export const PACKAGE_ID =
-  "0xceeea828b766398c565b95dd778fd1cc2ff0a73e0604add78a9b51864721c328";
+  "0x4b7d16e7934c3d03bd4a41c06eaf55479158a0b0e466d694c03d0a86434b3fdb";
 export const GOAT_REGISTRY_ID =
-  "0xc538c3f8e22acefe415a22b31fa4c424d73e22fe8136792ac2918eee4e8cfd4f";
+  "0x0f10120f9c6ffcd11bf9d30f139fc579577d3763a13e37da12c190c4cf7aa916";
 
 // Module and function names
 export const MODULE_NAME = "clicker_nft";
@@ -14,7 +14,7 @@ export const CLICK_FUNCTION = "click";
 
 // Tier information
 export const TIER_NAMES = ["Noob", "Tryhard", "No-life", "Legend", "GOAT"];
-export const TIER_THRESHOLDS = [0, 5, 10, 15];
+export const TIER_THRESHOLDS = [0, 5, 10, 15, 20];
 
 // Placeholder images (to be replaced with real NFT images)
 export const TIER_IMAGES = {

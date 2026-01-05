@@ -88,7 +88,8 @@ public fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &mut Tx
 
     update_tier(nft);
 
-    if (nft.tier >= 3 && !nft.is_goat && registry.goat_count < 10) {
+    // GOAT promotion: tier 3 (Legend) + 20 clics minimum + top 10
+    if (nft.tier >= 3 && nft.clicks >= 20 && !nft.is_goat && registry.goat_count < 10) {
         nft.tier = 4;
         nft.name = string::utf8(b"GOAT");
         nft.image_url = string::utf8(b"https://ipfs.io/ipfs/bafybeiarb25eo4flfl5scqlqgujqcshh4ujvtkz4mwfmq2odrydnuwv3uq");

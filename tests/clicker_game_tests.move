@@ -178,11 +178,11 @@ fun test_tier_evolution_to_legend() {
             i = i + 1;
         };
 
-        // Devrait être GOAT (tier 4) car premier à atteindre Legend
+        // Devrait être Legend (tier 3), pas encore GOAT (besoin de 20 clics)
         assert!(clicker_nft::get_clicks(&nft) == 16, EClicksMismatch);
-        assert!(clicker_nft::get_tier(&nft) == 4, ETierMismatch);
-        assert!(clicker_nft::get_name(&nft) == string::utf8(b"GOAT"), ENameMismatch);
-        assert!(clicker_nft::is_goat(&nft), EIsGoatMismatch);
+        assert!(clicker_nft::get_tier(&nft) == 3, ETierMismatch);
+        assert!(clicker_nft::get_name(&nft) == string::utf8(b"Legend"), ENameMismatch);
+        assert!(!clicker_nft::is_goat(&nft), EIsGoatMismatch);
 
         ts::return_to_sender(&scenario, nft);
         ts::return_shared(registry);
@@ -212,7 +212,7 @@ fun test_goat_promotion_first_player() {
         let mut registry = ts::take_shared<GOATRegistry>(&scenario);
 
         let mut i = 0;
-        while (i < 16) {
+        while (i < 20) {
             clicker_nft::click(&mut nft, &mut registry, scenario.ctx());
             i = i + 1;
         };
@@ -257,7 +257,7 @@ fun test_goat_limit_10_players() {
             let mut registry = ts::take_shared<GOATRegistry>(&scenario);
 
             let mut i = 0;
-            while (i < 16) {
+            while (i < 20) {
                 clicker_nft::click(&mut nft, &mut registry, scenario.ctx());
                 i = i + 1;
             };
@@ -303,9 +303,9 @@ fun test_goat_stays_goat_after_more_clicks() {
         let mut nft = ts::take_from_sender<ClickerNFT>(&scenario);
         let mut registry = ts::take_shared<GOATRegistry>(&scenario);
 
-        // Atteindre GOAT avec exactement 16 clicks
+        // Atteindre GOAT avec exactement 20 clicks
         let mut i = 0;
-        while (i < 16) {
+        while (i < 20) {
             clicker_nft::click(&mut nft, &mut registry, scenario.ctx());
             i = i + 1;
         };
@@ -330,7 +330,7 @@ fun test_goat_stays_goat_after_more_clicks() {
         };
 
         // Vérifier qu'il reste GOAT
-        assert!(clicker_nft::get_clicks(&nft) == 21, EClicksMismatch);
+        assert!(clicker_nft::get_clicks(&nft) == 25, EClicksMismatch);
         assert!(clicker_nft::is_goat(&nft), EIsGoatMismatch);
         assert!(clicker_nft::get_tier(&nft) == 4, ETierMismatch);
 
