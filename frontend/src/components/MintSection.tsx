@@ -9,7 +9,6 @@ export function MintSection({ onMint, loading }: MintSectionProps) {
       <h2 className="pixel-text pixel-text-md mb-6">
         YOU DON'T HAVE A CLICKER NFT YET
       </h2>
-      <div className="text-6xl mb-8">🖱️</div>
       <button
         onClick={onMint}
         disabled={loading}

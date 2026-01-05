@@ -48,7 +48,7 @@ fun init(ctx: &mut TxContext) {
         goats: vector::empty<address>(),
     };
 
-    // Partager l'objet pour que tous les joueurs puissent y accéder
+    // Share object for all players
     transfer::share_object(goat_registry);
 }
 
@@ -114,7 +114,6 @@ public fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &mut Tx
 
 // ========= INTERNAL FUNCTIONS =========
 
-/// Met à jour le tier du NFT selon les clicks
 fun update_tier(nft: &mut ClickerNFT) {
     let new_tier = get_tier_for_clicks(nft.clicks);
 

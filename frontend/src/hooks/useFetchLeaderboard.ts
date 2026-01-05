@@ -30,7 +30,7 @@ export function useFetchLeaderboard(suiClient: SuiClient) {
 
       // Extract GOAT addresses
       const fields = registry.data.content.fields as any;
-      const goatAddresses = fields.goat_addresses || [];
+      const goatAddresses = fields.goats || [];
 
       if (goatAddresses.length === 0) {
         setLeaderboard([]);

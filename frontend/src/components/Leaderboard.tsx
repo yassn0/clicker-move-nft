@@ -11,7 +11,7 @@ export function Leaderboard({ leaderboard, loading }: LeaderboardProps) {
     <div className="pixel-card" style={{ minWidth: "350px" }}>
       <div className="text-center mb-6">
         <h2 className="pixel-text pixel-text-md" style={{ color: "var(--color-accent)" }}>
-          🐐 TOP 10 GOAT 🐐
+          TOP 10 GOAT
         </h2>
       </div>
 
@@ -22,9 +22,7 @@ export function Leaderboard({ leaderboard, loading }: LeaderboardProps) {
       ) : leaderboard.length === 0 ? (
         <div className="text-center pixel-text pixel-text-xs">
           NO GOATS YET!
-          <div className="mt-4 text-4xl">🎯</div>
           <p className="mt-4 pixel-text-xs" style={{ color: "var(--color-text-secondary)" }}>
-            BE THE FIRST TO REACH 20 CLICKS!
           </p>
         </div>
       ) : (
