@@ -5,7 +5,6 @@ use clicker_game::clicker_nft::{Self, ClickerNFT, GOATRegistry};
 use sui::test_scenario::{Self as ts, next_tx};
 use std::string;
 
-const ENotMinted: u64 = 1;
 const EClicksMismatch: u64 = 2;
 const ETierMismatch: u64 = 3;
 const ENameMismatch: u64 = 4;
@@ -13,8 +12,6 @@ const EIsGoatMismatch: u64 = 5;
 const EGoatCountMismatch: u64 = 6;
 
 const PLAYER1: address = @0x1;
-const PLAYER2: address = @0x2;
-const PLAYER3: address = @0x3;
 
 #[test]
 fun test_mint_nft() {

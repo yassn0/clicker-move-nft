@@ -3,9 +3,9 @@ export const NETWORK = "testnet";
 
 // Smart contract deployment
 export const PACKAGE_ID =
-  "0xdff131e62a5f4d4bde2fad1370253c0ae168ead296d1b75c040c0f25374323cf";
+  "0xceeea828b766398c565b95dd778fd1cc2ff0a73e0604add78a9b51864721c328";
 export const GOAT_REGISTRY_ID =
-  "0x0bcbdfbff13f30c1b5dcbf5df204c652d9328ea256eea5291ac8e8d9d4642894";
+  "0xc538c3f8e22acefe415a22b31fa4c424d73e22fe8136792ac2918eee4e8cfd4f";
 
 // Module and function names
 export const MODULE_NAME = "clicker_nft";

@@ -25,4 +25,4 @@ frontend/*.suo
 frontend/*.ntvs*
 frontend/*.njsproj
 frontend/*.sln
-frontend/*.sw?
+frontend/*.sw?Move.lock

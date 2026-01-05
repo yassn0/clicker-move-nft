@@ -2,9 +2,6 @@ module clicker_game::clicker_nft;
 
 use std::string::{Self, String};
 use sui::event;
-use sui::object::{Self, UID, ID};
-use sui::transfer;
-use sui::tx_context::{Self, TxContext};
 
 // ========= STRUCTS =========
 
@@ -62,7 +59,7 @@ public fun init_for_testing(ctx: &mut TxContext) {
 
 // ========= PUBLIC ENTRY FUNCTIONS =========
 
-public entry fun mint_nft(ctx: &mut TxContext) {
+public fun mint_nft(ctx: &mut TxContext) {
     let sender = tx_context::sender(ctx);
 
     let nft = ClickerNFT {
@@ -84,7 +81,7 @@ public entry fun mint_nft(ctx: &mut TxContext) {
     transfer::transfer(nft, sender);
 }
 
-public entry fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &mut TxContext) {
+public fun click(nft: &mut ClickerNFT, registry: &mut GOATRegistry, ctx: &mut TxContext) {
     let sender = tx_context::sender(ctx);
 
     nft.clicks = nft.clicks + 1;
