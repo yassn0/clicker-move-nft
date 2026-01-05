@@ -7,6 +7,7 @@ import { GameSection } from "./components/GameSection";
 import { useFetchNFT } from "./hooks/useFetchNFT";
 import { useMintNFT } from "./hooks/useMintNFT";
 import { useClickNFT } from "./hooks/useClickNFT";
+import { useFetchLeaderboard } from "./hooks/useFetchLeaderboard";
 
 function App() {
   const account = useCurrentAccount();
@@ -14,6 +15,8 @@ function App() {
   const [message, setMessage] = useState("");
 
   const { nftData, fetchNFT } = useFetchNFT(account, suiClient);
+  const { leaderboard, loading: leaderboardLoading } =
+    useFetchLeaderboard(suiClient);
 
   const { mintNFT, loading: mintLoading } = useMintNFT(account, () => {
     setMessage("NFT minted successfully!");
@@ -32,9 +35,9 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
+    <div className="pixel-app">
       <Header />
-      <main className="flex-1 flex flex-col items-center justify-center p-8 gap-8">
+      <main className="pixel-main">
         {!account ? (
           <WelcomeScreen />
         ) : !nftData ? (
@@ -45,13 +48,11 @@ function App() {
             onClick={clickNFT}
             onRefresh={fetchNFT}
             loading={clickLoading}
+            leaderboard={leaderboard}
+            leaderboardLoading={leaderboardLoading}
           />
         )}
-        {message && (
-          <p className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-black/80 px-8 py-4 rounded-xl text-base shadow-lg animate-[slideUp_0.3s_ease]">
-            {message}
-          </p>
-        )}
+        {message && <div className="pixel-toast">{message}</div>}
       </main>
     </div>
   );

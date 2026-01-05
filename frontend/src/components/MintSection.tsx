@@ -5,16 +5,17 @@ interface MintSectionProps {
 
 export function MintSection({ onMint, loading }: MintSectionProps) {
   return (
-    <div className="text-center bg-white/10 backdrop-blur-lg px-12 py-12 rounded-3xl shadow-2xl">
-      <h2 className="text-2xl font-semibold mb-4">
-        You don't have a Clicker NFT yet
+    <div className="pixel-card text-center max-w-2xl">
+      <h2 className="pixel-text pixel-text-md mb-6">
+        YOU DON'T HAVE A CLICKER NFT YET
       </h2>
+      <div className="text-6xl mb-8">🖱️</div>
       <button
         onClick={onMint}
         disabled={loading}
-        className="bg-gradient-to-r from-pink-400 to-rose-500 text-white font-bold text-xl px-8 py-4 rounded-xl hover:translate-y-[-2px] hover:shadow-[0_10px_20px_rgba(245,87,108,0.4)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="pixel-button pixel-button-lg pixel-button-accent"
       >
-        {loading ? "Minting..." : "Mint Your NFT"}
+        {loading ? "MINTING..." : "MINT YOUR NFT"}
       </button>
     </div>
   );

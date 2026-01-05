@@ -1,10 +1,13 @@
 export function WelcomeScreen() {
   return (
-    <div className="text-center bg-white/10 backdrop-blur-lg px-12 py-12 rounded-3xl shadow-2xl">
-      <h2 className="text-2xl font-semibold mb-4">
-        Welcome to Clicker NFT Evolution!
+    <div className="pixel-card text-center max-w-2xl">
+      <h2 className="pixel-text pixel-text-lg mb-6 pixel-bounce">
+        WELCOME TO CLICK EVOLUTION!
       </h2>
-      <p className="text-lg">Connect your Sui wallet to start playing</p>
+      <p className="pixel-text pixel-text-sm mt-4">
+        CONNECT YOUR SUI WALLET TO START
+      </p>
+      <div className="mt-6 text-6xl">🎮</div>
     </div>
   );
 }
