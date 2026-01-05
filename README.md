@@ -4,7 +4,7 @@ A blockchain-based clicker game where your NFT evolves based on your total click
 
 ## Live Demo
 
-**Play Now:** [https://frontend-ipr7au56h-yassn0s-projects.vercel.app](https://frontend-ipr7au56h-yassn0s-projects.vercel.app)
+**Play Now:** [https://frontend-nine-iota-45.vercel.app)
 
 
 ## What is Clicker NFT Evolution?
