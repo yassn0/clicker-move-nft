@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations and utilities */
+@layer utilities {
+  .backdrop-blur-custom {
+    backdrop-filter: blur(10px);
+  }
+}
