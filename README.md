@@ -2,8 +2,6 @@
 
 A blockchain-based clicker game where your NFT evolves based on your total clicks. Built with Move on Sui blockchain.
 
-## Live Demo
-
 **Play Now:** [https://frontend-nine-iota-45.vercel.app)
 
 
